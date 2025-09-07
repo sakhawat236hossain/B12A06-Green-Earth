@@ -37,7 +37,7 @@ const displayCart = (carts) => {
   });
 };
 
-//  Add to Cart function
+//  Add to Cart Btn function
 const addToCart = (title, price) => {
   alert(`${title} has been added to the cart`);
 
@@ -46,43 +46,57 @@ const addToCart = (title, price) => {
 
   const cartContainer = document.getElementById("your-cart");
 
-  const itemDiv = document.createElement("div");
-  itemDiv.className = "flex justify-between items-center text-center border p-1 rounded mt-1";
+  const creatDiv = document.createElement("div");
+  creatDiv.className = "flex justify-between items-center text-center border p-1 rounded mt-1";
 
-  itemDiv.innerHTML = `
+  creatDiv.innerHTML = `
     <span>${title} - ${price} tk</span>
     <i class="fa-solid fa-xmark cursor-pointer"></i>
   `;
 
   // Remove item
-  itemDiv.querySelector("i").addEventListener("click", () => {
-    cartContainer.removeChild(itemDiv);
+  creatDiv.querySelector("i").addEventListener("click", () => {
+    cartContainer.removeChild(creatDiv);
     totalPrice -= price;
     document.getElementById("total-price").innerText = totalPrice;
   });
 
-  cartContainer.appendChild(itemDiv);
+  cartContainer.appendChild(creatDiv);
 
   document.getElementById("total-price").innerText = totalPrice;
 };
 
-// ৩. Display Categories
+
+
+// Display Categories
+// remove active class (categories)
+const removeCategoryActive = () => {
+  document.querySelectorAll("#categories-containar button").forEach((btn) => {
+    btn.classList.remove("active");
+  });
+};
+
+// display categories
 const displayCategories = (categories) => {
   const categoriesContainer = document.getElementById("categories-containar");
   categoriesContainer.innerHTML = "";
 
-  categories.forEach(category => {
+  categories.forEach((category) => {
     const btn = document.createElement("button");
     btn.innerText = category.category_name;
     btn.className = "btn w-full rounded-sm text-black p-1 mt-3 hover:bg-[#15803D]";
 
     btn.addEventListener("click", () => {
+      removeCategoryActive();  
+      btn.classList.add("active"); 
       loadCategoryPlants(category.id);
     });
 
     categoriesContainer.appendChild(btn);
   });
 };
+
+
 
 // Load Categories
 const loadCategories = () => {
@@ -91,7 +105,7 @@ const loadCategories = () => {
     .then(data => {
       if(data && data.categories) displayCategories(data.categories);
 
-      // প্রথম category এর plants দেখাও
+      // category plants 
       if(data.categories && data.categories.length > 0) {
         loadCategoryPlants(data.categories[0].id);
       }
@@ -99,7 +113,7 @@ const loadCategories = () => {
     .catch(err => console.error(err));
 };
 
-// ৫. Load Plants by Category
+//  Load Plants by Category
 const loadCategoryPlants = (categoryId) => {
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then(res => res.json())
@@ -109,5 +123,5 @@ const loadCategoryPlants = (categoryId) => {
     .catch(err => console.error(err));
 };
 
-// Initial call
+
 loadCategories();
