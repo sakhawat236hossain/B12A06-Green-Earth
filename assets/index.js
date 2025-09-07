@@ -13,7 +13,7 @@ const displayCart = (carts) => {
 
   carts.forEach(cart => {
     const div = document.createElement("div");
-    div.className = "bg-white rounded shadow p-2 space-y-2";
+    div.className = "bg-white rounded shadow-lg p-2 space-y-2";
 
     div.innerHTML = `
       <img src="${cart.image}" alt="" class="w-full h-40 object-cover rounded">
@@ -50,11 +50,11 @@ const addToCart = (title, price) => {
   creatDiv.className = "flex justify-between items-center text-center border p-1 rounded mt-1";
 
   creatDiv.innerHTML = `
-    <span>${title} - ${price} tk</span>
+    <span>${title} <br> ${price} tk</span>
     <i class="fa-solid fa-xmark cursor-pointer"></i>
   `;
 
-  // Remove item
+  // Remove 
   creatDiv.querySelector("i").addEventListener("click", () => {
     cartContainer.removeChild(creatDiv);
     totalPrice -= price;
@@ -69,7 +69,7 @@ const addToCart = (title, price) => {
 
 
 // Display Categories
-// remove active class (categories)
+// remove active class 
 const removeCategoryActive = () => {
   document.querySelectorAll("#categories-containar button").forEach((btn) => {
     btn.classList.remove("active");
