@@ -1,6 +1,7 @@
 let cartItems = [];
 let totalPrice = 0;
 
+
 //  Display Cart
 const displayCart = (carts) => {
   const cartContainer = document.getElementById("cart-containar");
@@ -20,7 +21,7 @@ const displayCart = (carts) => {
       <h1 class="font-bold">${cart.name}</h1>
       <p>${cart.description}</p>
       <div class="flex justify-between items-center">
-        <p class="bg-[#DCFCE7] p-2 rounded-sm">${cart.category}</p>
+        <button onclick="loadCategoryDetail(${cart.id})" class="bg-[#DCFCE7] p-2 rounded-sm">${cart.category}</button> 
         <p>${cart.price} tk</p>
       </div>
       <button class="add-to-cart-btn p-2 bg-[#15803D] text-white w-full mt-2 rounded">
@@ -65,10 +66,38 @@ const addToCart = (title, price) => {
 
   document.getElementById("total-price").innerText = totalPrice;
 };
+//load modal function
+const  loadCategoryDetail= async(id)=> {
+const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+
+const res = await fetch(url);
+const details = await res.json();
+displayCategoriesDeatails(details.plants);
+
+}
 
 
+// display modal function
+const displayCategoriesDeatails =(category)=>{
+// console.log(categorie);
+const detailsPlantsBox = document.getElementById("datelis-containar");
+detailsPlantsBox.innerHTML = `
 
-// Display Categories
+
+  <div class="p-2">
+<h1 class="font-bold">${category.category}</h1>
+
+  <img class="mt-2 h-70 w-full" src="${category.image}" alt="">
+  <h1 class="mt-2"><span class="font-bold">Category:</span> ${category.name}</h1>
+<h1 class="font-bold"><Price:💲<span>${category.price}</span></h1>
+<p class="mt-2"><span class="font-bold">Category:</span>${category.description}</p>
+  </div>
+
+
+`;
+ document.getElementById("my_modal_5").showModal();
+
+}
 // remove active class 
 const removeCategoryActive = () => {
   document.querySelectorAll("#categories-containar button").forEach((btn) => {
@@ -113,7 +142,7 @@ const loadCategories = () => {
     .catch(err => console.error(err));
 };
 
-//  Load Plants by Category
+//  Load Plants Category
 const loadCategoryPlants = (categoryId) => {
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then(res => res.json())
@@ -122,6 +151,5 @@ const loadCategoryPlants = (categoryId) => {
     })
     .catch(err => console.error(err));
 };
-
 
 loadCategories();
