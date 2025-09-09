@@ -75,7 +75,7 @@ const loadAllPlants = () => {
       }
     })
     .catch((err) => console.error(err))
-    .finally(() => manageSpinner(false));
+     manageSpinner(false); 
 };
 
 // Load category plants
@@ -90,7 +90,7 @@ const loadCategoryPlants = (categoryId) => {
       }
     })
     .catch((err) => console.error(err))
-    .finally(() => manageSpinner(false));
+    manageSpinner(false) // .finally(() =>
 };
 
 // Load categories
@@ -119,7 +119,7 @@ const loadCategories = () => {
       });
     })
     .catch((err) => console.error(err))
-    .finally(() => manageSpinner(false));
+    manageSpinner(false); //.finally(() => 
 };
 
 // Modal
@@ -142,10 +142,10 @@ const loadCategoryDetail = async (id) => {
     document.getElementById("my_modal_5").showModal();
   } catch (err) {
     console.error(err);
-  } finally {
-    manageSpinner(false);
+  } 
+    manageSpinner(false); //finally {
   }
-};
+// };
 
 // Initial load
 loadAllPlants();
