@@ -90,7 +90,7 @@ const loadCategoryPlants = (categoryId) => {
       }
     })
     .catch((err) => console.error(err))
-    manageSpinner(false) // .finally(() =>
+    manageSpinner(false);
 };
 
 // Load categories
@@ -119,7 +119,7 @@ const loadCategories = () => {
       });
     })
     .catch((err) => console.error(err))
-    manageSpinner(false); //.finally(() => 
+    manageSpinner(false);
 };
 
 // Modal
@@ -143,9 +143,8 @@ const loadCategoryDetail = async (id) => {
   } catch (err) {
     console.error(err);
   } 
-    manageSpinner(false); //finally {
+    manageSpinner(false); 
   }
-// };
 
 // Initial load
 loadAllPlants();
