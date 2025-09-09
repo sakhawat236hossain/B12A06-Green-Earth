@@ -135,7 +135,7 @@ const loadCategoryDetail = async (id) => {
         <h1 class="font-bold">${details.plants.category}</h1>
         <img class="mt-2 h-70 w-full" src="${details.plants.image}" alt="">
         <h1 class="mt-2"><span class="font-bold">Name:</span> ${details.plants.name}</h1>
-        <h1 class="font-bold">Price: 💲<span>${details.plants.price}</span></h1>
+        <h1 class="font-bold">Price: ৳ <span>${details.plants.price}</span></h1>
         <p class="mt-2"><span class="font-bold">Description:</span> ${details.plants.description}</p>
       </div>
     `;
